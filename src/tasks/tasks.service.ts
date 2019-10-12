@@ -5,7 +5,26 @@ import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
-  private tasks: Task[] = [];
+  private tasks: Task[] = [
+    {
+        id: 'd611ddb0-ec98-11e9-98a0-9f86c02b42da',
+        title: 'test title 1',
+        description: 'test description 1',
+        status: TaskStatus.OPEN,
+    },
+    {
+        id: 'd9aeda90-ec98-11e9-98a0-9f86c02b42da',
+        title: 'test title 2',
+        description: 'test description 2',
+        status: TaskStatus.OPEN,
+    },
+    {
+        id: 'dc900180-ec98-11e9-98a0-9f86c02b42da',
+        title: 'test title 3',
+        description: 'test description 3',
+        status: TaskStatus.OPEN,
+    },
+];
 
   getAllTasks(): Task[] {
       return this.tasks;
@@ -27,6 +46,11 @@ export class TasksService {
 
     this.tasks.push(task);
     return task;
+  }
+
+  updateTaskStatus(id: string, status: TaskStatus): Task {
+    this.getTaskByID(id).status = status;
+    return this.getTaskByID(id);
   }
 
   deleteTask(id: string) {
