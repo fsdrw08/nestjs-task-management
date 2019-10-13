@@ -37,11 +37,11 @@ export class TasksService {
     let tasks: Task[] = this.getAllTasks();
 
     if (status) {
-      tasks.find(task => task.status === status);
+      tasks = tasks.filter(task => task.status === status);
     }
 
     if (search) {
-      tasks.find(task =>
+      tasks = tasks.filter(task =>
         task.title.includes(search) ||
         task.description.includes(search),
       );
