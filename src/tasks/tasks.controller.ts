@@ -15,7 +15,6 @@ export class TasksController {
     } else {
       return this.tasksService.getAllTasks();
     }
-    console.log(filterDto);
   }
 
   @Get('/:id')
