@@ -11,52 +11,52 @@ export class TasksService {
   constructor(
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
-  ) {}
-//   private tasks: Task[] = [
-//     {
-//         id: 'd611ddb0-ec98-11e9-98a0-9f86c02b42da',
-//         title: 'test title 1',
-//         description: 'test description 1',
-//         status: TaskStatus.OPEN,
-//     },
-//     {
-//         id: 'd9aeda90-ec98-11e9-98a0-9f86c02b42da',
-//         title: 'test title 2',
-//         description: 'test description 2',
-//         status: TaskStatus.OPEN,
-//     },
-//     {
-//         id: 'dc900180-ec98-11e9-98a0-9f86c02b42da',
-//         title: 'test title 3',
-//         description: 'test description 3',
-//         status: TaskStatus.OPEN,
-//     },
-// ];
+  ) { }
+  //   private tasks: Task[] = [
+  //     {
+  //         id: 'd611ddb0-ec98-11e9-98a0-9f86c02b42da',
+  //         title: 'test title 1',
+  //         description: 'test description 1',
+  //         status: TaskStatus.OPEN,
+  //     },
+  //     {
+  //         id: 'd9aeda90-ec98-11e9-98a0-9f86c02b42da',
+  //         title: 'test title 2',
+  //         description: 'test description 2',
+  //         status: TaskStatus.OPEN,
+  //     },
+  //     {
+  //         id: 'dc900180-ec98-11e9-98a0-9f86c02b42da',
+  //         title: 'test title 3',
+  //         description: 'test description 3',
+  //         status: TaskStatus.OPEN,
+  //     },
+  // ];
 
-//   getAllTasks(): Task[] {
-//       return this.tasks;
-//   }
+  //   getAllTasks(): Task[] {
+  //       return this.tasks;
+  //   }
 
-//   getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
-//     const { status, search } = filterDto;
+  //   getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
+  //     const { status, search } = filterDto;
 
-//     let tasks: Task[] = this.getAllTasks();
+  //     let tasks: Task[] = this.getAllTasks();
 
-//     if (status) {
-//       tasks = tasks.filter(task => task.status === status);
-//     }
+  //     if (status) {
+  //       tasks = tasks.filter(task => task.status === status);
+  //     }
 
-//     if (search) {
-//       tasks = tasks.filter(task =>
-//         task.title.includes(search) ||
-//         task.description.includes(search),
-//       );
-//     }
-//     return tasks;
-//   }
+  //     if (search) {
+  //       tasks = tasks.filter(task =>
+  //         task.title.includes(search) ||
+  //         task.description.includes(search),
+  //       );
+  //     }
+  //     return tasks;
+  //   }
 
   async getTaskByID(id: number): Promise<Task> {
-//  http://typeorm.delightful.studio/classes/_repository_repository_.repository.html#findone
+    //  http://typeorm.delightful.studio/classes/_repository_repository_.repository.html#findone
     const found = await this.taskRepository.findOne(id);
 
     if (!found) {
@@ -67,28 +67,20 @@ export class TasksService {
 
   }
 
-   async createTask(createTaskDto: CreateTaskDto) {
-     const { title, description } = createTaskDto; // desctruction
-
-     const task = new Task();
-     task.title = title;
-     task.description = description;
-     task.status = TaskStatus.OPEN;
-     await task.save();
-
-     return task;
+  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.taskRepository.createTask(createTaskDto);
   }
 
-//   updateTaskStatus(id: string, status: TaskStatus): Task {
-//     this.getTaskByID(id).status = status;
-//     return this.getTaskByID(id);
-//   }
+  //   updateTaskStatus(id: string, status: TaskStatus): Task {
+  //     this.getTaskByID(id).status = status;
+  //     return this.getTaskByID(id);
+  //   }
 
-//   deleteTask(id: string) {
-//     const found = this.getTaskByID(id);
-//     this.tasks = this.tasks.filter(task => task.id !== found.id);
-//     /*this.tasks.splice(
-//       this.tasks.findIndex(
-//         task => task.id === id), 1);*/
-//   }
+  //   deleteTask(id: string) {
+  //     const found = this.getTaskByID(id);
+  //     this.tasks = this.tasks.filter(task => task.id !== found.id);
+  //     /*this.tasks.splice(
+  //       this.tasks.findIndex(
+  //         task => task.id === id), 1);*/
+  //   }
 }
