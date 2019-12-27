@@ -11,7 +11,7 @@ export class TasksService {
   constructor(
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
-  ) { }
+  ) {}
   //   private tasks: Task[] = [
   //     {
   //         id: 'd611ddb0-ec98-11e9-98a0-9f86c02b42da',
@@ -64,7 +64,6 @@ export class TasksService {
     }
 
     return found;
-
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
@@ -76,11 +75,7 @@ export class TasksService {
   //     return this.getTaskByID(id);
   //   }
 
-  //   deleteTask(id: string) {
-  //     const found = this.getTaskByID(id);
-  //     this.tasks = this.tasks.filter(task => task.id !== found.id);
-  //     /*this.tasks.splice(
-  //       this.tasks.findIndex(
-  //         task => task.id === id), 1);*/
-  //   }
+  async deleteTask(id: number): Promise<void> {
+    const result = await this.taskRepository.delete(id);
+  }
 }

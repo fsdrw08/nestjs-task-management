@@ -4,6 +4,11 @@
 #-------------------------------------------------------------------------------------------------------------
 
 version: '3'
+networks: 
+  default:
+    external: 
+      name: bridge
+      
 services:
   web:
     # Uncomment the next line to use a non-root user. On Linux, this will prevent
@@ -13,16 +18,13 @@ services:
 
     build: 
       context: .
-      dockerfile: Dockerfile
-    
+      dockerfile: Dockerfile    
     volumes:
       - ..:/workspace
-      
     ports:
       - '3000:3000'
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
-
     links:
       - db
 
@@ -35,4 +37,4 @@ services:
       POSTGRES_PASSWORD: pass
       POSTGRES_USER: user
       POSTGRES_DB: data
- 
+
