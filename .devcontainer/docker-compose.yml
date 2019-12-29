@@ -4,11 +4,7 @@
 #-------------------------------------------------------------------------------------------------------------
 
 version: '3'
-networks: 
-  default:
-    external: 
-      name: bridge
-      
+
 services:
   web:
     # Uncomment the next line to use a non-root user. On Linux, this will prevent

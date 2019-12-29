@@ -12,26 +12,6 @@ export class TasksService {
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
   ) {}
-  //   private tasks: Task[] = [
-  //     {
-  //         id: 'd611ddb0-ec98-11e9-98a0-9f86c02b42da',
-  //         title: 'test title 1',
-  //         description: 'test description 1',
-  //         status: TaskStatus.OPEN,
-  //     },
-  //     {
-  //         id: 'd9aeda90-ec98-11e9-98a0-9f86c02b42da',
-  //         title: 'test title 2',
-  //         description: 'test description 2',
-  //         status: TaskStatus.OPEN,
-  //     },
-  //     {
-  //         id: 'dc900180-ec98-11e9-98a0-9f86c02b42da',
-  //         title: 'test title 3',
-  //         description: 'test description 3',
-  //         status: TaskStatus.OPEN,
-  //     },
-  // ];
 
   //   getAllTasks(): Task[] {
   //       return this.tasks;
@@ -70,10 +50,12 @@ export class TasksService {
     return this.taskRepository.createTask(createTaskDto);
   }
 
-  //   updateTaskStatus(id: string, status: TaskStatus): Task {
-  //     this.getTaskByID(id).status = status;
-  //     return this.getTaskByID(id);
-  //   }
+  async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
+    const task = await this.getTaskByID(id);
+    task.status = status;
+    await task.save();
+    return task
+  }
 
   async deleteTask(id: number): Promise<void> {
     const result = await this.taskRepository.delete(id);
