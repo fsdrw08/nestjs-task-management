@@ -11,29 +11,11 @@ export class TasksService {
   constructor(
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
-  ) {}
+  ) { }
 
-  //   getAllTasks(): Task[] {
-  //       return this.tasks;
-  //   }
-
-  //   getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
-  //     const { status, search } = filterDto;
-
-  //     let tasks: Task[] = this.getAllTasks();
-
-  //     if (status) {
-  //       tasks = tasks.filter(task => task.status === status);
-  //     }
-
-  //     if (search) {
-  //       tasks = tasks.filter(task =>
-  //         task.title.includes(search) ||
-  //         task.description.includes(search),
-  //       );
-  //     }
-  //     return tasks;
-  //   }
+  async getTask(filterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.taskRepository.getTasks(filterDto);
+  }
 
   async getTaskByID(id: number): Promise<Task> {
     //  http://typeorm.delightful.studio/classes/_repository_repository_.repository.html#findone
@@ -54,7 +36,7 @@ export class TasksService {
     const task = await this.getTaskByID(id);
     task.status = status;
     await task.save();
-    return task
+    return task;
   }
 
   async deleteTask(id: number): Promise<void> {
