@@ -24,7 +24,7 @@ export class AuthService {
     }
 
     const payLoad: JwtPayload = { username };
-    const accessToken = await this.jwtService.sign(payLoad);
+    const accessToken = this.jwtService.sign(payLoad);
     return { accessToken };
   }
 }
