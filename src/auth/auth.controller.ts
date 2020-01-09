@@ -19,6 +19,7 @@ export class AuthController {
   async signIn(@Body() authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     return await this.authService.signIn(authCredentialsDto);
   }
+
   @Post('/test')
   @UseGuards(AuthGuard())
   test(@Req() req) {
