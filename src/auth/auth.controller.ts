@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Post('/test')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   test(@GetUser() user: User) {
     console.log(user);
   }
