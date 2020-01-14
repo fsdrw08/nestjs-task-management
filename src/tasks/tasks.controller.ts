@@ -39,16 +39,20 @@ export class TasksController {
     return this.tasksService.createTask(createTaskDto, user);
   }
 
-  // @Patch('/:id/status')
-  // updateTaskStatus(
-  //   @Param('id') id: number,
-  //   @Body('status', TaskStatusValidationPipe) status: TaskStatus,
-  // ): Promise<Task> {
-  //   return this.tasksService.updateTaskStatus(id, status);
-  // }
+  @Patch('/:id/status')
+  updateTaskStatus(
+    @Param('id') id: number,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+    @GetUser() user: User,
+  ): Promise<Task> {
+    return this.tasksService.updateTaskStatus(id, status, user);
+  }
 
   @Delete('/:id')
-  deleteTaskByID(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.tasksService.deleteTask(id);
+  deleteTaskByID(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return this.tasksService.deleteTask(id, user);
   }
 }
