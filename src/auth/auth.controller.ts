@@ -12,19 +12,26 @@ export class AuthController {
   ) {}
 
   @Post('/signUp')
-  @UsePipes(ValidationPipe)
-  async signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<void> {
+  /*@UsePipes(ValidationPipe)*/
+  async signUp(
+    @Body() authCredentialsDto: AuthCredentialsDto,
+  ): Promise<void> {
     await this.authService.signUp(authCredentialsDto);
   }
 
   @Post('/signin')
-  async signIn(@Body() authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-    return await this.authService.signIn(authCredentialsDto);
+  async signIn(
+    @Body('username') username: string,
+    @Body('password') password: string,
+  ): Promise<{ accessToken: string }> {
+    return await this.authService.signIn(username, password);
   }
 
+  /*
   @Post('/test')
   @UseGuards(AuthGuard('jwt'))
   test(@GetUser() user: User) {
     console.log(user);
   }
+  */
 }
